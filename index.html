@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter by Shivansh Agarwal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #converter {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 10px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div id="converter">
+        <h2>Temperature Converter</h2>
+
+        <label for="temperature">Temperature:</label>
+        <input type="text" id="temperature" placeholder="Enter temperature">
+
+        <label for="conversionType">Select Conversion:</label>
+        <select id="conversionType">
+            <option value="celsiusToFahrenheit">Celsius to Fahrenheit</option>
+            <option value="fahrenheitToCelsius">Fahrenheit to Celsius</option>
+            <option value="celsiusToKelvin">Celsius to Kelvin</option>
+            <option value="kelvinToCelsius">Kelvin to Celsius</option>
+        </select>
+
+        <button onclick="convertTemperature()">Convert</button>
+
+        <p id="result"></p>
+
+        <footer>
+            Temperature Converter by Shivansh Agarwal &copy; 2024
+        </footer>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            var temperatureInput = document.getElementById("temperature");
+            var conversionTypeInput = document.getElementById("conversionType");
+            var resultDisplay = document.getElementById("result");
+
+            var temperature = parseFloat(temperatureInput.value);
+            var conversionType = conversionTypeInput.value;
+
+            if (!isNaN(temperature)) {
+                switch (conversionType) {
+                    case "celsiusToFahrenheit":
+                        var convertedTemperature = (temperature * 9/5) + 32;
+                        resultDisplay.innerHTML = `<span style="color: #28a745;">${temperature} Celsius is equal to ${convertedTemperature.toFixed(2)} Fahrenheit.</span>`;
+                        break;
+                    case "fahrenheitToCelsius":
+                        var convertedTemperature = (temperature - 32) * 5/9;
+                        resultDisplay.innerHTML = `<span style="color: #28a745;">${temperature} Fahrenheit is equal to ${convertedTemperature.toFixed(2)} Celsius.</span>`;
+                        break;
+                    case "celsiusToKelvin":
+                        var convertedTemperature = temperature + 273.15;
+                        resultDisplay.innerHTML = `<span style="color: #28a745;">${temperature} Celsius is equal to ${convertedTemperature.toFixed(2)} Kelvin.</span>`;
+                        break;
+                    case "kelvinToCelsius":
+                        var convertedTemperature = temperature - 273.15;
+                        resultDisplay.innerHTML = `<span style="color: #28a745;">${temperature} Kelvin is equal to ${convertedTemperature.toFixed(2)} Celsius.</span>`;
+                        break;
+                    default:
+                        resultDisplay.innerText = "Please select a valid conversion type.";
+                }
+            } else {
+                resultDisplay.innerText = "Please enter a valid temperature.";
+            }
+        }
+    </script>
+</body>
+</html>
